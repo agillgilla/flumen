@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    title Listen
+    link(rel='stylesheet', href='css/style.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css')
+    line(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css')
+
+    script(src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+    crossorigin="anonymous")
+
+    script(type='text/javascript', src='js/app.js')
+  body
+    h1 Flumen
+    section.playlistSection
+      table#playlistTable.darkTable
+        thead
+          tr
+            th  
+            th Title
+            th Artist
+            th Album
+            th
+              span.fa.fa-clock-o
+        tbody
+    div#footer
+      .song-info
+        span#currSong Song Title
+        br
+        span#currArtist Artist
+      .action
+        a.shuffle.active(href='#')
+          i.fa.fa-random
+        a.previous.jcarousel-prev(href='#')
+          i.fa.fa-step-backward
+        a.play(href='#')
+          i.fa.fa-play.fa-fw
+        a.next.jcarousel-next(href='#')
+          i.fa.fa-step-forward
+        a.replay(href='#')
+          i.fa.fa-refresh
+        .length
+          label(for='timeSlider') 0:00
+          input#timeSlider(type='range', min='0', max='1000', value='0', step='.1')
+          output.duration(for='timeSlider')
+      .volume-slider
+        .volume-slider-inner
+          i.fa.fa-volume-down
+          input#fader.volume-slider(type='range', min='0', max='100', value='100', step='1', oninput='outputUpdate(value)')
+          i.fa.fa-volume-up
+          
+
+

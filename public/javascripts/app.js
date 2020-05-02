@@ -59,6 +59,8 @@ var songAudio = new Audio();
 
 var dragging = false;
 
+var fetchedSongs = null;
+
 $(document).ready(function() {
 	var audio = new Audio();
 
@@ -100,7 +102,9 @@ $(document).ready(function() {
 		audio.pause();
 	});
 
-	document.getElementById("fader").oninput = function() {
+	var faderElem = document.getElementById("fader");
+	faderElem.style.background = 'linear-gradient(to right, #cc0000 0%, #cc0000 ' + faderElem.value + '%, #fff ' + faderElem.value + '%, white 100%)';
+	faderElem.oninput = function() {
 	  	this.style.background = 'linear-gradient(to right, #cc0000 0%, #cc0000 ' + this.value + '%, #fff ' + this.value + '%, white 100%)';
 		songAudio.volume = this.value / this.max;
 	};
@@ -136,22 +140,17 @@ $(document).ready(function() {
 		return false;
 	});
 
-	
-
 	buildPlaylist();
-
 });
 
-function playSong(songName) {
-	songAudio.src = '/streamMusic?filename=' + songName;
+function playSong(songName, songIndex) {
+	songAudio.src = '/streamMusic?filename=' + encodeURIComponent(songName);
 
 	songAudio.load();
 
 	songAudio.oncanplay = function() {
 		console.log("Can play!");
 	};
-
-
 
 	var playPromise = songAudio.play();
 
@@ -160,8 +159,13 @@ function playSong(songName) {
 			var timeSliderElem = document.getElementById("timeSlider")
 			timeSliderElem.value = (songAudio.currentTime / songAudio.duration) * timeSliderElem.max;
 			timeSliderElem.style.background = 'linear-gradient(to right, #cc0000 0%, #cc0000 ' + timeSliderElem.value / 10 + '%, #fff ' + timeSliderElem.value / 10 + '%, white 100%)';
+			$("#current-time").html(secondsToHms(songAudio.currentTime));
+			$("#total-time").html(secondsToHms(songAudio.duration));
 		}
 	};
+
+	$("#current-time").html(secondsToHms(songAudio.currentTime));
+	$("#total-time").html(secondsToHms(songAudio.duration));
 
 	if (playPromise !== undefined) {
 		playPromise.then(_ => {
@@ -169,6 +173,9 @@ function playSong(songName) {
 			// Automatic playback started!
 			// Show playing UI.
 			console.log("Playback worked!");
+
+			$("#currSong").html(fetchedSongs[songIndex].title);
+			$("#currArtist").html(fetchedSongs[songIndex].artist);
 		})
 		.catch(error => {
 			$(".play i").removeClass("fa-pause").addClass("fa-play");
@@ -185,8 +192,6 @@ function playSong(songName) {
 function buildPlaylist() {
 	// Playlist
 	const playlistBody = document.querySelector("#playlistTable tbody");
-
-	var fetchedSongs = null;
 
 	$.ajax({
         url: "/songsList",  // the local Node server
@@ -220,8 +225,7 @@ function buildPlaylist() {
 
 	for (const playlistPlayButton of playlistPlay) {
 		playlistPlayButton.addEventListener("click", (event) => {
-			playSong(playlistPlayButton.parentElement.getAttribute("name"));
-			console.log(playlistPlayButton.closest("tr").getAttribute("data-index"));
+			playSong(playlistPlayButton.parentElement.getAttribute("name"), playlistPlayButton.closest("tr").getAttribute("data-index"));
 		});
 	}
 }

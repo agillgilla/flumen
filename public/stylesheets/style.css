@@ -124,8 +124,8 @@ div.action {
 	display:inline-block;
 	float: center;
 	text-align: center;
-	margin: 20px 0;
-	padding-left: 75px;
+	margin: 20px;
+	padding-left: 0px;
 }
 
 div.action .previous, div.action .next {
@@ -215,7 +215,7 @@ div.volume-slider a.close {
 
 div.length {
 	width: 750px;
-	margin: 20px auto;
+	margin: 0px auto;
 	color: #999;
 	font-size: 10px;
 }
@@ -374,7 +374,7 @@ div.song-info {
 	float: left;
 	padding-top: 25px;
 	padding-left: 20px;
-	width: 200px;
+	width: 300px;
 	text-align: left;
 }
 
@@ -382,10 +382,21 @@ span#currSong {
 	font-size: 20px;
 	font-weight: bold;
 	color: #E6E6E6;
-	line-height: 200%
 }
 
 span#currArtist {
 	font-size: 16px;
 	color: #E6E6E6;
 }
+	
+span#current-time {
+	font-size: 14px;
+	float: left;
+	padding-left: 10px;
+}
+span#total-time {
+	font-size: 14px;
+	float: right;
+	text-align: right;
+}
+	

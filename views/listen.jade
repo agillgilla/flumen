@@ -28,6 +28,7 @@ html
       .song-info
         span#currSong Song Title
         br
+        br
         span#currArtist Artist
       .action
         a.shuffle.active(href='#')
@@ -41,7 +42,8 @@ html
         a.replay(href='#')
           i.fa.fa-refresh
         .length
-          label(for='timeSlider') 0:00
+          span#current-time --:--
+          span#total-time --:--
           input#timeSlider(type='range', min='0', max='1000', value='0', step='.1')
           output.duration(for='timeSlider')
       .volume-slider

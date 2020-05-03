@@ -356,7 +356,9 @@ tr.songEntry:hover {
 }
 
 table.darkTable tr td i.playPause { display:none; }
-table.darkTable tr:hover td i.playPause { display:inline-block; }
+/*table.darkTable tr:hover td i.playPause { display:inline-block; } */
+
+.show-on-hover:hover td i.playPause { display: inline-block; }
 
 #footer {
    position:fixed;

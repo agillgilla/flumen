@@ -1,65 +1,16 @@
-const songList = [
-  {
-    title: "Lost On You",
-    artist: "LP",
-    duration: 268,
-    album: "Lost On You",
-  },
-  {
-    title: "Bad Liar",
-    artist: "Selena Gomez",
-    duration: 215,
-    album: "Bad Liar",
-  },
-  {
-    title: "Shape of You",
-    artist: "Ed Sheeran",
-    duration: 233,
-    album: "÷ (Divide)",
-  },
-  {
-    title: "Ride",
-    artist: "Twentry One Pilots",
-    duration: 215,
-    album: "Blurryface",
-  },
-  {
-    title: "Set Fire to the Rain",
-    artist: "Adele",
-    duration: 242,
-    album: "21",
-  },
-  {
-    title: "Girl on Fire",
-    artist: "Alicia Keys",
-    duration: 225,
-    album: "Girl on Fire",
-  },
-  {
-    title: "Swing, Swing",
-    artist: "The All American Rejects",
-    duration: 233,
-    album: "The All-American Rejects",
-  },
-  {
-    title: "Jamie All Over",
-    artist: "Mayday Parade",
-    duration: 216,
-    album: "A Lesson in Romantics",
-  },
-  {
-    title: "Titanium",
-    artist: "David Guetta ft. Sia",
-    duration: 245,
-    album: "Nothing but the Beat",
-  }
-];
-
 var songAudio = new Audio();
 
 var dragging = false;
 
 var fetchedSongs = null;
+/*
+  The index of the song being played (corresponding to index in fetched song list.)
+*/
+var currSongIndex = -1;
+/*
+  An array of indices corresponding to songs in the fetched song list.
+*/
+var songQueue;
 
 $(document).ready(function() {
 	var audio = new Audio();
@@ -110,7 +61,11 @@ $(document).ready(function() {
 	};
 
 	document.getElementById("timeSlider").oninput = function() {
-	  	this.style.background = 'linear-gradient(to right, #cc0000 0%, #cc0000 ' + this.value / (this.max / 100) + '%, #fff ' + this.value / (this.max / 100) + '%, white 100%)';
+		if (dragging) {
+			var dragTime = (this.value / this.max) * songAudio.duration;
+			$("#current-time").html(secondsToHms(dragTime));
+		}
+		this.style.background = 'linear-gradient(to right, #cc0000 0%, #cc0000 ' + this.value / (this.max / 100) + '%, #fff ' + this.value / (this.max / 100) + '%, white 100%)';
 	};
 
 	document.getElementById("timeSlider").onmousedown = function() {
@@ -118,6 +73,10 @@ $(document).ready(function() {
 	};
 
 	document.getElementById("timeSlider").onmouseup = function() {
+		if (dragging) {
+			var dragTime = (this.value / this.max) * songAudio.duration;
+			songAudio.currentTime = dragTime;
+		}
 	  	dragging = false;
 	};
 
@@ -125,12 +84,16 @@ $(document).ready(function() {
 		$(".play").toggleClass("active");
 		if($(".play i").hasClass("fa-play")) {
 			$(".play i").removeClass("fa-play").addClass("fa-pause");
+			var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
+			playPauseIcon.removeClass("fa-play-circle").addClass("fa-pause-circle")
 			if (songAudio.paused) {
 				songAudio.play();
 			}
 		}
 		else {
 			$(".play i").removeClass("fa-pause").addClass("fa-play");
+			var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
+			playPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle")
 			if (!songAudio.paused) {
 				songAudio.pause();
 			}
@@ -174,8 +137,15 @@ function playSong(songName, songIndex) {
 			// Show playing UI.
 			console.log("Playback worked!");
 
+			currSongIndex = songIndex;
+
 			$("#currSong").html(fetchedSongs[songIndex].title);
 			$("#currArtist").html(fetchedSongs[songIndex].artist);
+
+			var playPauseIcon = $("[data-index=" + songIndex + "]").find("i");
+			playPauseIcon.removeClass("fa-play-circle").addClass("fa-pause-circle");
+			playPauseIcon.removeClass("show-on-hover");
+			playPauseIcon.css("display", "inline-block");
 		})
 		.catch(error => {
 			$(".play i").removeClass("fa-pause").addClass("fa-play");
@@ -208,7 +178,7 @@ function buildPlaylist() {
 	let html = "";
 	fetchedSongs.forEach((song, index) => {
 		html += `
-		<tr data-index="${index}" class="songEntry">
+		<tr data-index="${index}" class="songEntry show-on-hover">
 		<td name="${song.file}"><i class="playPause fa fa-play-circle fa-2x"></i></td>
 		<td align="left">${song.title}</td>
 		<td align="left">${song.artist}</td>
@@ -225,7 +195,29 @@ function buildPlaylist() {
 
 	for (const playlistPlayButton of playlistPlay) {
 		playlistPlayButton.addEventListener("click", (event) => {
-			playSong(playlistPlayButton.parentElement.getAttribute("name"), playlistPlayButton.closest("tr").getAttribute("data-index"));
+			var songIndex = event.target.closest("tr").getAttribute("data-index");
+			if (currSongIndex !== songIndex) {
+				// Clicked on a new song row
+				if (currSongIndex !== -1) {
+					var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
+					currPlayPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
+					currPlayPauseIcon.css("display", "");
+					currPlayPauseIcon.addClass("show-on-hover");
+				}
+				playSong(playlistPlayButton.parentElement.getAttribute("name"), songIndex);
+			} else {
+				// Clicked on same song row
+				var playPauseIcon = $("[data-index=" + songIndex + "]").find("i");
+				if (songAudio.paused) {
+					songAudio.play();
+					playPauseIcon.removeClass("fa-play-circle").addClass("fa-pause-circle");
+					$(".play i").removeClass("fa-play").addClass("fa-pause");
+				} else {
+					songAudio.pause();
+					playPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
+					$(".play i").removeClass("fa-pause").addClass("fa-play");
+				}
+			}
 		});
 	}
 }

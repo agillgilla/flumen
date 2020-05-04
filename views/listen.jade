@@ -11,10 +11,11 @@ html
     crossorigin="anonymous")
 
     script(type='text/javascript', src='js/app.js')
+    script(type='text/javascript', src='js/sorttable.js')
   body
     h1 Flumen
     section.playlistSection
-      table#playlistTable.darkTable
+      table#playlistTable.darkTable.sortable
         thead
           tr
             th  
@@ -47,7 +48,7 @@ html
           input#timeSlider(type='range', min='0', max='1000', value='0', step='.1')
           output.duration(for='timeSlider')
       .volume-slider
-        .volume-slider-inner
+        div#volume-div.volume-slider-inner
           i.fa.fa-volume-down
           input#fader.volume-slider(type='range', min='0', max='100', value='100', step='1', oninput='outputUpdate(value)')
           i.fa.fa-volume-up

@@ -1,57 +1,96 @@
 var songAudio = new Audio();
 
+var shuffle = true;
+var replay = false;
+
 var dragging = false;
 
 var fetchedSongs = null;
+
 /*
-  The index of the song being played (corresponding to index in fetched song list.)
+	A list of randomized indices to play in shuffle mode (corresponding to indices
+	in fetched song list.)
+*/
+var shuffledList;
+
+/*
+	The index of the song being played (corresponding to index in fetched song list.)
 */
 var currSongIndex = -1;
+
 /*
-  An array of indices corresponding to songs in the fetched song list.
+	The index of the song in the shuffled list that is currently being played.
+*/
+var shuffledIndex = -1;
+
+/*
+	An array of indices corresponding to songs in the fetched song list.
 */
 var songQueue;
+
+function updateShuffleColor() {
+	if (shuffle) {
+		$( ".shuffle").css("color", "#cc0000");
+	} else {
+		$( ".shuffle").css("color", "#FFF");
+	}
+}
+
+function updateReplayColor() {
+	if (replay) {
+		$( ".replay").css("color", "#cc0000");
+	} else {
+		$( ".replay").css("color", "#FFF");
+	}
+}
+
+function shuffleList(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+function generateShuffledList() {
+    shuffledList = [];
+    for (var i = 0; i < fetchedSongs.length; i++) {
+        shuffledList.push(i);
+    }
+
+    shuffleList(shuffledList);
+
+    console.log(shuffledList);
+}
 
 $(document).ready(function() {
 	var audio = new Audio();
 
-  	$( "#playButton" ).click(function() {
-		var initialPlay = false;
-	
-		audio.src = '/streamMusic';
-
-		audio.load();
-
-		audio.oncanplay = function() {
-			if (initialPlay) return;
-  			
-  			initialPlay = true;
-
-			console.log("Can play!");
-    		audio.currentTime = 15;
-    		console.log(audio.duration);
-		};
-
-		var playPromise = audio.play();
-
-		if (playPromise !== undefined) {
-			playPromise.then(_ => {
-
-			  // Automatic playback started!
-			  // Show playing UI.
-			  console.log("Playback worked!");
-			})
-			.catch(error => {
-			  // Auto-play was prevented
-			  // Show paused UI.
-			  console.log("Playback failed!");
-			});
-		}
+	$( ".shuffle").click(function() {
+		shuffle = !shuffle;
+		updateShuffleColor();
+		return false;
 	});
 
-	$( "#pauseButton" ).click(function() {
-		audio.pause();
+	$( ".replay").click(function() {
+		replay = !replay;
+		updateReplayColor();
+		return false;
 	});
+
+	updateShuffleColor();
+	updateReplayColor();
 
 	var faderElem = document.getElementById("fader");
 	faderElem.style.background = 'linear-gradient(to right, #cc0000 0%, #cc0000 ' + faderElem.value + '%, #fff ' + faderElem.value + '%, white 100%)';
@@ -85,15 +124,33 @@ $(document).ready(function() {
 		if($(".play i").hasClass("fa-play")) {
 			$(".play i").removeClass("fa-play").addClass("fa-pause");
 			var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
-			playPauseIcon.removeClass("fa-play-circle").addClass("fa-pause-circle")
-			if (songAudio.paused) {
-				songAudio.play();
+			playPauseIcon.removeClass("fa-play-circle").addClass("fa-pause-circle");
+			
+			if (songAudio.src != "") {
+				if (songAudio.paused) {
+					songAudio.play();
+				}
+			} else {
+				shuffledIndex += 1;
+				if (shuffledIndex >= shuffledList.length) {
+					shuffledIndex = 0;
+					shuffleList(shuffledList);
+				}
+
+				if (currSongIndex !== -1) {
+					var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
+					currPlayPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
+					currPlayPauseIcon.css("display", "");
+					currPlayPauseIcon.addClass("show-on-hover");
+				}
+				currSongIndex = shuffledList[shuffledIndex];
+				playSong($("[data-index=" + currSongIndex + "]").find("i").parent().attr("name"), shuffledList[shuffledIndex]);
 			}
 		}
 		else {
 			$(".play i").removeClass("fa-pause").addClass("fa-play");
 			var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
-			playPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle")
+			playPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
 			if (!songAudio.paused) {
 				songAudio.pause();
 			}
@@ -103,7 +160,60 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$(".previous").click(function(e) {
+		if (shuffle) {
+			shuffledIndex -= 1;
+			if (shuffledIndex < 0) {
+				shuffledIndex = 0;
+			}
+
+			if (currSongIndex !== -1) {
+				var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
+				currPlayPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
+				currPlayPauseIcon.css("display", "");
+				currPlayPauseIcon.addClass("show-on-hover");
+			}
+			currSongIndex = shuffledList[shuffledIndex];
+			playSong($("[data-index=" + currSongIndex + "]").find("i").parent().attr("name"), shuffledList[shuffledIndex]);
+		} else if (replay) {
+			songAudio.currentTime = 0;
+			songAudio.play();
+		}
+		// Returing false prevents the page from scrolling up when
+		// hitting the button.
+		return false;
+	});
+
+	$(".next").click(function(e) {
+		if (shuffle) {
+			shuffledIndex += 1;
+			if (shuffledIndex >= shuffledList.length) {
+				shuffledIndex = 0;
+				shuffleList(shuffledList);
+			}
+
+			if (currSongIndex !== -1) {
+				var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
+				currPlayPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
+				currPlayPauseIcon.css("display", "");
+				currPlayPauseIcon.addClass("show-on-hover");
+			}
+			currSongIndex = shuffledList[shuffledIndex];
+			playSong($("[data-index=" + currSongIndex + "]").find("i").parent().attr("name"), shuffledList[shuffledIndex]);
+		} else if (replay) {
+			songAudio.currentTime = 0;
+			songAudio.play();
+		}
+		// Returing false prevents the page from scrolling up when
+		// hitting the button.
+		return false;
+	});
+
 	buildPlaylist();
+
+	if (shuffle) {
+		generateShuffledList();
+	}
 });
 
 function playSong(songName, songIndex) {
@@ -114,6 +224,28 @@ function playSong(songName, songIndex) {
 	songAudio.oncanplay = function() {
 		console.log("Can play!");
 	};
+
+	songAudio.onended = function() {
+		if (shuffle) {
+			shuffledIndex += 1;
+			if (shuffledIndex >= shuffledList.length) {
+				shuffledIndex = 0;
+				shuffleList(shuffledList);
+			}
+
+			if (currSongIndex !== -1) {
+				var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
+				currPlayPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
+				currPlayPauseIcon.css("display", "");
+				currPlayPauseIcon.addClass("show-on-hover");
+			}
+			currSongIndex = shuffledList[shuffledIndex];
+			playSong($("[data-index=" + currSongIndex + "]").find("i").parent().attr("name"), shuffledList[shuffledIndex]);
+		} else if (replay) {
+			songAudio.currentTime = 0;
+			songAudio.play();
+		}
+	}
 
 	var playPromise = songAudio.play();
 
@@ -196,7 +328,7 @@ function buildPlaylist() {
 	for (const playlistPlayButton of playlistPlay) {
 		playlistPlayButton.addEventListener("click", (event) => {
 			var songIndex = event.target.closest("tr").getAttribute("data-index");
-			if (currSongIndex !== songIndex) {
+			if (currSongIndex != songIndex) {
 				// Clicked on a new song row
 				if (currSongIndex !== -1) {
 					var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");

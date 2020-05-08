@@ -15,11 +15,13 @@ router.get('/', function(req, res, next) {
 
     var playlists = getDirectories(playlistsDir);
 
+    var playlistList = [];
+
     for (var i = 0; i < playlists.length; i++) {
-    	console.log(path.join(playlistsDir, playlists[i]));
+    	playlistList.push({name:playlists[i], path:path.join(playlistsDir, playlists[i])});
     }
 
-  	res.render('index', {});
+    res.json(playlistList);
 });
 
 module.exports = router;

@@ -28,6 +28,11 @@ var shuffledIndex = -1;
 */
 var songQueue;
 
+/*
+	The base name of the playlist we're playing
+*/
+var playlistName;
+
 function updateShuffleColor() {
 	if (shuffle) {
 		$( ".shuffle").css("color", "#cc0000");
@@ -217,7 +222,7 @@ $(document).ready(function() {
 });
 
 function playSong(songName, songIndex) {
-	songAudio.src = '/streamMusic?filename=' + encodeURIComponent(songName);
+	songAudio.src = '/streamMusic?filename=' + encodeURIComponent(songName) + '&playlist=' + encodeURIComponent(playlistName);
 
 	songAudio.load();
 
@@ -295,9 +300,16 @@ function buildPlaylist() {
 	// Playlist
 	const playlistBody = document.querySelector("#playlistTable tbody");
 
+	var urlString = window.location.href;
+	var url = new URL(urlString);
+	playlistName = url.searchParams.get("playlist");
+
 	$.ajax({
         url: "/songsList",  // the local Node server
         method: 'GET',
+        data: {
+        	playlist: playlistName
+    	},
         async: false,
         success: function(data) {
             console.log(data); //display data in cosole to see if I receive it

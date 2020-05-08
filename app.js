@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var listenRouter = require('./routes/listen');
 var streamMusicRouter = require('./routes/streamMusic');
 var songsListRouter = require('./routes/songsList');
+var fetchPlaylistsRouter = require('./routes/fetchPlaylists')
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use('/users', usersRouter);
 app.use('/listen', listenRouter);
 app.use('/streamMusic', streamMusicRouter);
 app.use('/songsList', songsListRouter);
+app.use('/fetchPlaylists', fetchPlaylistsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

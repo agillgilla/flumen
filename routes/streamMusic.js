@@ -104,10 +104,12 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   //console.log(req.query.filename);
 
+  const playlistsDir = '/Users/Arjun/Deezloader Music/';
 
-  var playlistPath = '/Users/Arjun/Deezloader Music/MUSIC/';
+  var playlistDir = path.join(playlistsDir, req.query.playlist);
+  //var playlistPath = '/Users/Arjun/Deezloader Music/50 Latin Classics';
 
-  var filePath = path.join(playlistPath, req.query.filename);
+  var filePath = path.join(playlistDir, req.query.filename);
   
   /*
   var returnData = {};

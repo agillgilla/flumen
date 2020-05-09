@@ -13,7 +13,9 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  res.render('listen', {});
+  const pageTitle = 'Flumen -' + req.query.playlist;
+
+  res.render('listen', {title: pageTitle});
   /*
   var filePath = '/Users/Arjun/Deezloader Music/MUSIC/AC_DC - Back In Black.mp3';
   var stat = fs.statSync(filePath);

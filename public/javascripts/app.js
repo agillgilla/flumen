@@ -80,8 +80,6 @@ function generateShuffledList() {
 }
 
 $(document).ready(function() {
-	var audio = new Audio();
-
 	$( ".shuffle").click(function() {
 		shuffle = !shuffle;
 		updateShuffleColor();
@@ -126,8 +124,9 @@ $(document).ready(function() {
 
 	$(".play").click(function(e) {
 		$(".play").toggleClass("active");
-		if($(".play i").hasClass("fa-play")) {
-			$(".play i").removeClass("fa-play").addClass("fa-pause");
+
+		if(songAudio.paused) {
+			
 			var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
 			playPauseIcon.removeClass("fa-play-circle").addClass("fa-pause-circle");
 			
@@ -151,9 +150,8 @@ $(document).ready(function() {
 				currSongIndex = shuffledList[shuffledIndex];
 				playSong($("[data-index=" + currSongIndex + "]").find("i").parent().attr("name"), shuffledList[shuffledIndex]);
 			}
-		}
-		else {
-			$(".play i").removeClass("fa-pause").addClass("fa-play");
+		} else {
+			
 			var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
 			playPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
 			if (!songAudio.paused) {
@@ -219,12 +217,24 @@ $(document).ready(function() {
 	if (shuffle) {
 		generateShuffledList();
 	}
-});
 
-function playSong(songName, songIndex) {
-	songAudio.src = '/streamMusic?filename=' + encodeURIComponent(songName) + '&playlist=' + encodeURIComponent(playlistName);
+	songAudio.onplay = function() {
+		$(".play i").removeClass("fa-play").addClass("fa-pause");
+	};
 
-	songAudio.load();
+	songAudio.onpause = function() {
+		$(".play i").removeClass("fa-pause").addClass("fa-play");
+	};
+
+	songAudio.ontimeupdate = function() {
+		if (!dragging) {
+			var timeSliderElem = document.getElementById("timeSlider")
+			timeSliderElem.value = (songAudio.currentTime / songAudio.duration) * timeSliderElem.max;
+			timeSliderElem.style.background = 'linear-gradient(to right, #cc0000 0%, #cc0000 ' + timeSliderElem.value / 10 + '%, #fff ' + timeSliderElem.value / 10 + '%, white 100%)';
+			$("#current-time").html(secondsToHms(songAudio.currentTime));
+			$("#total-time").html(secondsToHms(songAudio.duration));
+		}
+	};
 
 	songAudio.oncanplay = function() {
 		console.log("Can play!");
@@ -251,25 +261,20 @@ function playSong(songName, songIndex) {
 			songAudio.play();
 		}
 	}
+});
+
+function playSong(songName, songIndex) {
+	songAudio.src = '/streamMusic?filename=' + encodeURIComponent(songName) + '&playlist=' + encodeURIComponent(playlistName);
+
+	songAudio.load();
 
 	var playPromise = songAudio.play();
-
-	songAudio.ontimeupdate = function() {
-		if (!dragging) {
-			var timeSliderElem = document.getElementById("timeSlider")
-			timeSliderElem.value = (songAudio.currentTime / songAudio.duration) * timeSliderElem.max;
-			timeSliderElem.style.background = 'linear-gradient(to right, #cc0000 0%, #cc0000 ' + timeSliderElem.value / 10 + '%, #fff ' + timeSliderElem.value / 10 + '%, white 100%)';
-			$("#current-time").html(secondsToHms(songAudio.currentTime));
-			$("#total-time").html(secondsToHms(songAudio.duration));
-		}
-	};
 
 	$("#current-time").html(secondsToHms(songAudio.currentTime));
 	$("#total-time").html(secondsToHms(songAudio.duration));
 
 	if (playPromise !== undefined) {
 		playPromise.then(_ => {
-			$(".play i").removeClass("fa-play").addClass("fa-pause");
 			// Automatic playback started!
 			// Show playing UI.
 			console.log("Playback worked!");
@@ -285,7 +290,6 @@ function playSong(songName, songIndex) {
 			playPauseIcon.css("display", "inline-block");
 		})
 		.catch(error => {
-			$(".play i").removeClass("fa-pause").addClass("fa-play");
 			// Auto-play was prevented
 			// Show paused UI.
 			console.log("Playback failed!");
@@ -355,11 +359,9 @@ function buildPlaylist() {
 				if (songAudio.paused) {
 					songAudio.play();
 					playPauseIcon.removeClass("fa-play-circle").addClass("fa-pause-circle");
-					$(".play i").removeClass("fa-play").addClass("fa-pause");
 				} else {
 					songAudio.pause();
 					playPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
-					$(".play i").removeClass("fa-pause").addClass("fa-play");
 				}
 			}
 		});

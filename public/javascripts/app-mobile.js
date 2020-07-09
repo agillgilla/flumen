@@ -95,12 +95,14 @@ $(document).ready(function() {
 	updateShuffleColor();
 	updateReplayColor();
 
+	
 	var faderElem = document.getElementById("fader");
 	faderElem.style.background = 'linear-gradient(to right, #cc0000 0%, #cc0000 ' + faderElem.value + '%, #fff ' + faderElem.value + '%, white 100%)';
 	faderElem.oninput = function() {
 	  	this.style.background = 'linear-gradient(to right, #cc0000 0%, #cc0000 ' + this.value + '%, #fff ' + this.value + '%, white 100%)';
 		songAudio.volume = this.value / this.max;
 	};
+	
 
 	document.getElementById("timeSlider").oninput = function() {
 		if (dragging) {
@@ -110,11 +112,11 @@ $(document).ready(function() {
 		this.style.background = 'linear-gradient(to right, #cc0000 0%, #cc0000 ' + this.value / (this.max / 100) + '%, #fff ' + this.value / (this.max / 100) + '%, white 100%)';
 	};
 
-	document.getElementById("timeSlider").onmousedown = function() {
+	document.getElementById("timeSlider").ontouchstart = function() {
 	  	dragging = true;
 	};
 
-	document.getElementById("timeSlider").onmouseup = function() {
+	document.getElementById("timeSlider").ontouchend = function() {
 		if (dragging) {
 			var dragTime = (this.value / this.max) * songAudio.duration;
 			songAudio.currentTime = dragTime;
@@ -332,10 +334,8 @@ function buildPlaylist() {
 	fetchedSongs.forEach((song, index) => {
 		html += `
 		<tr data-index="${index}" class="songEntry show-on-hover">
-		<td name="${song.file}"><i class="playPause fa fa-play-circle fa-2x"></i></td>
-		<td align="left">${song.title}</td>
-		<td align="left">${song.artist}</td>
-		<td align="left">${song.album}</td>
+		<td name="${song.file}"><i class="playPause fa fa-play-circle fa-5x"></i></td>
+		<td align="left"><span class="songName">${song.title}</span><br><span class="artistName">${song.artist}</span></td>
 		<td align="left" class="song-duration">${secondsToHms(song.duration)}</td>
 		</tr>
 		`;

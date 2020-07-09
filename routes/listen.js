@@ -3,8 +3,7 @@ fs = require('fs'),
 path = require('path'),
 util = require('util'),
 assert = require('assert'),
-lame = require("@suldashi/lame"),
-Speaker = require('speaker');
+browser = require('browser-detect');
 
 
 
@@ -15,7 +14,15 @@ router.get('/', function(req, res, next) {
 
   const pageTitle = 'Flumen - ' + req.query.playlist;
 
-  res.render('listen', {title: pageTitle});
+  const isMobile = browser(req.headers['user-agent']).mobile;
+
+  if (isMobile) {
+    res.render('listen-mobile', {title: pageTitle});
+  } else {
+    res.render('listen', {title: pageTitle});
+  }
+
+  
   /*
   var filePath = '/Users/Arjun/Deezloader Music/MUSIC/AC_DC - Back In Black.mp3';
   var stat = fs.statSync(filePath);

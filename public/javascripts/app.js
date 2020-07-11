@@ -24,9 +24,9 @@ var currSongIndex = -1;
 var shuffledIndex = -1;
 
 /*
-	An array of indices corresponding to songs in the fetched song list.
+	An array of indices of songs to play corresponding to songs in the fetched song list.
 */
-var songQueue;
+var songQueue = [];
 
 /*
 	The base name of the playlist we're playing
@@ -79,6 +79,45 @@ function generateShuffledList() {
     console.log(shuffledList);
 }
 
+function nextSong(shuffleDiff) {
+	if (shuffle) {
+
+		var nextSongIndexToPlay;
+
+		if (songQueue.length > 0) {
+			// Play from queue
+
+			var nextQueueIndex = songQueue.shift(); // .shift() removes and returns the first element of an array
+
+			nextSongIndexToPlay = nextQueueIndex;
+
+			var row = $("#queueTable").find('tbody').children('tr:first');
+			row.remove();
+		} else {
+			// Play from shuffled list
+
+			shuffledIndex += shuffleDiff;
+			if (shuffledIndex < 0) {
+				shuffledIndex = 0;
+			}
+
+			nextSongIndexToPlay = shuffledList[shuffledIndex]
+		}
+
+		if (currSongIndex !== -1) {
+			var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i.playPause");
+			currPlayPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
+			currPlayPauseIcon.css("display", "");
+			currPlayPauseIcon.addClass("show-on-hover");
+		}
+		currSongIndex = nextSongIndexToPlay;
+		playSong($("[data-index=" + nextSongIndexToPlay + "]").find("i.playPause").parent().attr("name"), nextSongIndexToPlay);
+	} else if (replay) {
+		songAudio.currentTime = 0;
+		songAudio.play();
+	}
+}
+
 $(document).ready(function() {
 	$( ".shuffle").click(function() {
 		shuffle = !shuffle;
@@ -125,9 +164,9 @@ $(document).ready(function() {
 	$(".play").click(function(e) {
 		$(".play").toggleClass("active");
 
-		if(songAudio.paused) {
+		if (songAudio.paused) {
 			
-			var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
+			var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i.playPause");
 			playPauseIcon.removeClass("fa-play-circle").addClass("fa-pause-circle");
 			
 			if (songAudio.src != "") {
@@ -135,30 +174,17 @@ $(document).ready(function() {
 					songAudio.play();
 				}
 			} else {
-				shuffledIndex += 1;
-				if (shuffledIndex >= shuffledList.length) {
-					shuffledIndex = 0;
-					shuffleList(shuffledList);
-				}
-
-				if (currSongIndex !== -1) {
-					var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
-					currPlayPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
-					currPlayPauseIcon.css("display", "");
-					currPlayPauseIcon.addClass("show-on-hover");
-				}
-				currSongIndex = shuffledList[shuffledIndex];
-				playSong($("[data-index=" + currSongIndex + "]").find("i").parent().attr("name"), shuffledList[shuffledIndex]);
+				nextSong(1);
 			}
 		} else {
 			
-			var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
+			var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i.playPause");
 			playPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
 			if (!songAudio.paused) {
 				songAudio.pause();
 			}
 		}
-		// Returing false prevents the page from scrolling up when
+		// Returning false prevents the page from scrolling up when
 		// hitting the button.
 		return false;
 	});
@@ -168,51 +194,18 @@ $(document).ready(function() {
 			songAudio.currentTime = 0;
 			return false;
 		} else {
-			if (shuffle) {
-				shuffledIndex -= 1;
-				if (shuffledIndex < 0) {
-					shuffledIndex = 0;
-				}
-
-				if (currSongIndex !== -1) {
-					var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
-					currPlayPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
-					currPlayPauseIcon.css("display", "");
-					currPlayPauseIcon.addClass("show-on-hover");
-				}
-				currSongIndex = shuffledList[shuffledIndex];
-				playSong($("[data-index=" + currSongIndex + "]").find("i").parent().attr("name"), shuffledList[shuffledIndex]);
-			} else if (replay) {
-				songAudio.currentTime = 0;
-				songAudio.play();
-			}
-			// Returing false prevents the page from scrolling up when
+			nextSong(-1);
+			
+			// Returning false prevents the page from scrolling up when
 			// hitting the button.
 			return false;
 		}
 	});
 
 	$(".next").click(function(e) {
-		if (shuffle) {
-			shuffledIndex += 1;
-			if (shuffledIndex >= shuffledList.length) {
-				shuffledIndex = 0;
-				shuffleList(shuffledList);
-			}
+		nextSong(1);
 
-			if (currSongIndex !== -1) {
-				var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
-				currPlayPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
-				currPlayPauseIcon.css("display", "");
-				currPlayPauseIcon.addClass("show-on-hover");
-			}
-			currSongIndex = shuffledList[shuffledIndex];
-			playSong($("[data-index=" + currSongIndex + "]").find("i").parent().attr("name"), shuffledList[shuffledIndex]);
-		} else if (replay) {
-			songAudio.currentTime = 0;
-			songAudio.play();
-		}
-		// Returing false prevents the page from scrolling up when
+		// Returning false prevents the page from scrolling up when
 		// hitting the button.
 		return false;
 	});
@@ -246,25 +239,7 @@ $(document).ready(function() {
 	};
 
 	songAudio.onended = function() {
-		if (shuffle) {
-			shuffledIndex += 1;
-			if (shuffledIndex >= shuffledList.length) {
-				shuffledIndex = 0;
-				shuffleList(shuffledList);
-			}
-
-			if (currSongIndex !== -1) {
-				var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
-				currPlayPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
-				currPlayPauseIcon.css("display", "");
-				currPlayPauseIcon.addClass("show-on-hover");
-			}
-			currSongIndex = shuffledList[shuffledIndex];
-			playSong($("[data-index=" + currSongIndex + "]").find("i").parent().attr("name"), shuffledList[shuffledIndex]);
-		} else if (replay) {
-			songAudio.currentTime = 0;
-			songAudio.play();
-		}
+		nextSong(1);
 	}
 });
 
@@ -289,7 +264,7 @@ function playSong(songName, songIndex) {
 			$("#currSong").html(fetchedSongs[songIndex].title);
 			$("#currArtist").html(fetchedSongs[songIndex].artist);
 
-			var playPauseIcon = $("[data-index=" + songIndex + "]").find("i");
+			var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i.playPause");
 			playPauseIcon.removeClass("fa-play-circle").addClass("fa-pause-circle");
 			playPauseIcon.removeClass("show-on-hover");
 			playPauseIcon.css("display", "inline-block");
@@ -302,8 +277,80 @@ function playSong(songName, songIndex) {
 	}
 }
 
+function addSongToQueue(songName, songIndex) {
+	var table = document.getElementById("queueTable").getElementsByTagName("tbody")[0];
+	var row = table.insertRow(-1);
+
+	var song = fetchedSongs[songIndex];
+
+	songQueue.push(songIndex);
+
+	//<tr data-index="${songQueue.length}" data-song-index="${songIndex}" class="songEntry show-on-hover">
+	row.innerHTML = `
+		<td class="table-button"><i class="removeFromQueue fa fa-times-circle fa-2x"></i></td>
+		<td class="table-button"><i class="moveUp fa fa-arrow-circle-up fa-2x"></i></td>
+		<td class="table-button"><i class="moveDown fa fa-arrow-circle-down fa-2x"></i></td>
+		<td align="left">${song.title}</td>
+		<td align="left">${song.artist}</td>
+		<td align="left">${song.album}</td>
+		<td align="left" class="song-duration">${secondsToHms(song.duration)}</td>
+		`
+	//</tr>
+	row.classList.add("songEntry");
+	row.classList.add("show-on-hover");
+	//row.setAttribute("data-index", (songQueue.length - 1).toString())
+	row.setAttribute("data-song-index", songIndex.toString())
+
+	var removeButtons = document.querySelectorAll("#queueTable .removeFromQueue");
+	var newRemoveButton = removeButtons[removeButtons.length - 1];
+	newRemoveButton.addEventListener("click", (event) => {
+		var row = event.target.closest("tr");
+		// rowIndex is 1-indexed.  wtf?
+		var tableIndex = row.rowIndex - 1;
+
+		songQueue.splice(tableIndex, 1);
+		row.remove();
+	});
+
+	var moveUpButtons = document.querySelectorAll("#queueTable .moveUp");
+	var newMoveUpButton = moveUpButtons[moveUpButtons.length - 1];
+	newMoveUpButton.addEventListener("click", (event) => {
+		// rowIndex is 1-indexed.  wtf?
+		var tableIndex = event.target.closest("tr").rowIndex - 1;
+
+		if (tableIndex > 0) {
+			var tableIndexVal = songQueue[tableIndex];
+			songQueue[tableIndex] = songQueue[tableIndex - 1];
+			songQueue[tableIndex - 1] = tableIndexVal;
+
+			var row = $(event.target).closest('tr');
+		    row.prev().before(row);
+		}
+	});
+
+
+	var moveDownButtons = document.querySelectorAll("#queueTable .moveDown");
+	var newMoveDownButton = moveDownButtons[moveDownButtons.length - 1];
+	newMoveDownButton.addEventListener("click", (event) => {
+		//var tableIndex = event.target.closest("tr").getAttribute("data-index");
+		//var tableIndex = parseInt(tableIndex);
+
+		// rowIndex is 1-indexed.  wtf?
+		var tableIndex = event.target.closest("tr").rowIndex - 1;
+
+		if (tableIndex < songQueue.length - 1) {
+			var tableIndexVal = songQueue[tableIndex];
+			songQueue[tableIndex] = songQueue[tableIndex + 1];
+			songQueue[tableIndex + 1] = tableIndexVal;
+
+			var row = $(event.target).closest('tr');
+			row.next().after(row);
+		}
+	});
+}
+
 /**
- * Build the playlist from the give array of songs.
+ * Build the playlist from the given array of songs.
  */
 function buildPlaylist() {
 	// Playlist
@@ -327,12 +374,13 @@ function buildPlaylist() {
     });
 
 
-	// Add the songs to the dom
+	// Add the song entries to the table
 	let html = "";
 	fetchedSongs.forEach((song, index) => {
 		html += `
 		<tr data-index="${index}" class="songEntry show-on-hover">
-		<td name="${song.file}"><i class="playPause fa fa-play-circle fa-2x"></i></td>
+		<td name="${song.file}" class="table-button"><i class="playPause fa fa-play-circle fa-2x"></i></td>
+		<td name="${song.file}" class="table-button"><i class="addToQueue fa fa-plus-circle fa-2x"></i></td>
 		<td align="left">${song.title}</td>
 		<td align="left">${song.artist}</td>
 		<td align="left">${song.album}</td>
@@ -344,23 +392,24 @@ function buildPlaylist() {
 
 	// Update the list items
 	var listItems = document.querySelectorAll("#playlistTable tbody tr");
-	var playlistPlay = document.querySelectorAll("#playlistTable .playPause");
+	var playButtons = document.querySelectorAll("#playlistTable .playPause");
+	var addToQueueButtons = document.querySelectorAll("#playlistTable .addToQueue");
 
-	for (const playlistPlayButton of playlistPlay) {
-		playlistPlayButton.addEventListener("click", (event) => {
+	for (const playButton of playButtons) {
+		playButton.addEventListener("click", (event) => {
 			var songIndex = event.target.closest("tr").getAttribute("data-index");
 			if (currSongIndex != songIndex) {
 				// Clicked on a new song row
 				if (currSongIndex !== -1) {
-					var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i");
+					var currPlayPauseIcon = $("[data-index=" + currSongIndex + "]").find("i.playPause");
 					currPlayPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
 					currPlayPauseIcon.css("display", "");
 					currPlayPauseIcon.addClass("show-on-hover");
 				}
-				playSong(playlistPlayButton.parentElement.getAttribute("name"), songIndex);
+				playSong(playButton.parentElement.getAttribute("name"), songIndex);
 			} else {
 				// Clicked on same song row
-				var playPauseIcon = $("[data-index=" + songIndex + "]").find("i");
+				var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i.playPause");
 				if (songAudio.paused) {
 					songAudio.play();
 					playPauseIcon.removeClass("fa-play-circle").addClass("fa-pause-circle");
@@ -369,6 +418,13 @@ function buildPlaylist() {
 					playPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
 				}
 			}
+		});
+	}
+
+	for (const addToQueueButton of addToQueueButtons) {
+		addToQueueButton.addEventListener("click", (event) => {
+			var songIndex = event.target.closest("tr").getAttribute("data-index");
+			addSongToQueue(addToQueueButton.parentElement.getAttribute("name"), songIndex);
 		});
 	}
 }

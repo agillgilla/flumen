@@ -36,74 +36,6 @@ div.container {
 	box-shadow: 0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);	
 }
 
-div.overlay-image {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	opacity: .6;
-	top: 0;
-	z-index: -2 !important;
-	filter: blur(4px);
-}
-
-div.overlay-image.the-nights.active {
-	animation: fadeIn 0.8s;
-	background: url('https://upload.wikimedia.org/wikipedia/en/6/64/The-Days-Nights-EP-by-Avicii.jpg') no-repeat 45% 20%;
-	background-size: 200% auto;
-}
-
-div.overlay-image.dont-look-down.active {
-	animation: fadeIn 0.8s;
-	background: url('https://i1.sndcdn.com/artworks-000110285449-17viu6-t500x500.jpg') no-repeat 45% 20%;
-	background-size: 200% auto;
-}
-
-div.overlay-image.avalanche.active {
-	animation: fadeIn 0.8s;
-	background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/bmth-tts.jpg') no-repeat 45% 20%;
-	background-size: 200% auto;
-}
-
-div.overlay {
-	position: absolute;
-  	top: 0;
-  	z-index: -1 !important;
-  	width: 100%;
-	height: 100%;
-	background: -moz-linear-gradient(top,rgba(51,51,51,0.65) 0,rgba(51,51,51,1) 100%);
-  	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(51,51,51,0.5)),color-stop(100%,rgba(51,51,51,1)));
-  	background: -webkit-linear-gradient(top,rgba(51,51,51,0.65) 0,rgba(51,51,51,1) 100%);
-  	background: -o-linear-gradient(top,rgba(51,51,51,0.65) 0,rgba(51,51,51,1) 100%);
-  	background: -ms-linear-gradient(top,rgba(51,51,51,0.65) 0,rgba(51,51,51,1) 100%);
-  	background: linear-gradient(to bottom,rgba(51,51,51,0.65) 0,rgba(51,51,51,1) 100%);
-}
-
-
-.jcarousel {
-	width: 310px;
-    position: relative;
-    overflow: hidden;
-}
-
-.jcarousel ul {
-    width: 20000em;
-    position: relative;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.jcarousel li {
-    float: left;
-	width: 310px;
-	height: 180px;
-	margin-left: 65px;
-}
-
-.jcarousel-pagination {
-	display: none;
-}
-
 div.info {
 	text-align: center;
 	color: #fff;
@@ -329,7 +261,6 @@ table.darkTable {
   border: 2px solid #000000;
   background-color: #2A2A2A;
   width: 100%;
-  height: 200px;
   text-align: center;
   border-collapse: collapse;
 }
@@ -342,13 +273,20 @@ table.darkTable tbody td {
   font-size: 16px;
   color: #E6E6E6;
 }
+
+
+
+
 /* This sets the first column to have fixed width
    and auto width for the rest */
-td {
+/*td {
   width: 50px;
-}
+}*/
 td+td {
   width: auto;
+}
+td.table-button {
+  width: 50px;
 }
 td.song-duration {
 	text-align: center;
@@ -382,6 +320,11 @@ table.darkTable tr td i.playPause { display:none; }
 /*table.darkTable tr:hover td i.playPause { display:inline-block; } */
 
 .show-on-hover:hover td i.playPause { display: inline-block; }
+
+table.darkTable tr td i.addToQueue { display:none; }
+/*table.darkTable tr:hover td i.playPause { display:inline-block; } */
+
+.show-on-hover:hover td i.addToQueue { display: inline-block; }
 
 #footer {
    position:fixed;
@@ -417,11 +360,13 @@ span#currArtist {
 }
 	
 span#current-time {
+	font-family: 'proxima-nova', sans-serif;
 	font-size: 14px;
 	float: left;
 	padding-left: 10px;
 }
 span#total-time {
+	font-family: 'proxima-nova', sans-serif;
 	font-size: 14px;
 	float: right;
 	text-align: right;

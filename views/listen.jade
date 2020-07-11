@@ -6,6 +6,8 @@ html
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css')
 
+    link(rel="icon" type="image/png" href="img/favicon.png")
+
     script(src="https://code.jquery.com/jquery-3.5.0.min.js"
     integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
     crossorigin="anonymous")
@@ -14,11 +16,26 @@ html
     script(type='text/javascript', src='js/sorttable.js')
   body
     h1 Flumen
+    h2 Queue
+    table#queueTable.darkTable
+      thead
+          tr
+            th
+            th
+            th
+            th Title
+            th Artist
+            th Album
+            th
+              span.fa.fa-clock-o
+        tbody
+    h2 Songs
     section.playlistSection
       table#playlistTable.darkTable.sortable
         thead
           tr
-            th  
+            th
+            th
             th Title
             th Artist
             th Album

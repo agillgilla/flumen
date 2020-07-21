@@ -212,6 +212,19 @@ $(document).ready(function() {
 		return false;
 	});
 
+	// This makes the keyboard media shortcut key work (in this case it is the previous track key)
+	navigator.mediaSession.setActionHandler("previoustrack", function() {
+	    if (songAudio.currentTime > 5) {
+			songAudio.currentTime = 0;
+		} else {
+			nextSong(-1);
+		}
+	});
+	// This makes the keyboard media shortcut key work (in this case it is the next track key)
+	navigator.mediaSession.setActionHandler("nexttrack", function() {
+	    nextSong(1);
+	});
+
 	buildPlaylist();
 
 	if (shuffle) {

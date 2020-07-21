@@ -210,6 +210,62 @@ $(document).ready(function() {
 		return false;
 	});
 
+	// This makes the keyboard media shortcut key work (in this case it is the previous track key)
+	navigator.mediaSession.setActionHandler("previoustrack", function() {
+	    if (songAudio.currentTime > 5) {
+			songAudio.currentTime = 0;
+		} else {
+			nextSong(-1);
+		}
+	});
+	// This makes the keyboard media shortcut key work (in this case it is the next track key)
+	navigator.mediaSession.setActionHandler("nexttrack", function() {
+	    nextSong(1);
+	});
+
+	// Media keyboard shortcuts:
+	// Ctrl+Left (for previous song)
+	// Ctrl+Right (for next song)
+	// Ctrl+Space (for play/pause)
+	function keyboardShortcutHandler(e) {
+		var evtobj = window.event? event : e;
+
+		if ((evtobj.keyCode == 39 && evtobj.ctrlKey)) {
+		  nextSong(1);
+		} else if (evtobj.keyCode == 37 && evtobj.ctrlKey) {
+		  if (songAudio.currentTime > 5) {
+				songAudio.currentTime = 0;
+			} else {
+				nextSong(-1);
+			}
+		} else if (evtobj.keyCode == 32 && evtobj.ctrlKey) {
+			$(".play").toggleClass("active");
+
+			if (songAudio.paused) {
+				
+				var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i.playPause");
+				playPauseIcon.removeClass("fa-play-circle").addClass("fa-pause-circle");
+				
+				if (songAudio.src != "") {
+					if (songAudio.paused) {
+						songAudio.play();
+					}
+				} else {
+					nextSong(1);
+				}
+			} else {
+				
+				var playPauseIcon = $("[data-index=" + currSongIndex + "]").find("i.playPause");
+				playPauseIcon.removeClass("fa-pause-circle").addClass("fa-play-circle");
+				if (!songAudio.paused) {
+					songAudio.pause();
+				}
+			}
+		}
+	}
+
+	document.onkeydown = keyboardShortcutHandler;
+
 	buildPlaylist();
 
 	if (shuffle) {
@@ -241,6 +297,9 @@ $(document).ready(function() {
 	songAudio.onended = function() {
 		nextSong(1);
 	}
+
+	var songsHeaderTag = document.getElementsByClassName("sortHeader")[0];
+	sorttable.innerSortFunction.apply(songsHeaderTag, []);
 });
 
 function playSong(songName, songIndex) {

@@ -13,6 +13,10 @@ var streamMusicRouter = require('./routes/streamMusic');
 var songsListRouter = require('./routes/songsList');
 var fetchPlaylistsRouter = require('./routes/fetchPlaylists')
 
+var fetchSongApi = require('./api/fetchSong');
+var songsListApi = require('./api/songsList');
+var fetchPlaylistsApi = require('./api/fetchPlaylists')
+
 var app = express();
 
 // view engine setup
@@ -24,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public',express.static(path.join(__dirname, 'public')));
 app.use('/img',express.static(path.join(__dirname, 'public/images')));
 app.use('/js',express.static(path.join(__dirname, 'public/javascripts')));
 app.use('/css',express.static(path.join(__dirname, 'public/stylesheets')));
@@ -34,6 +39,10 @@ app.use('/listen', listenRouter);
 app.use('/streamMusic', streamMusicRouter);
 app.use('/songsList', songsListRouter);
 app.use('/fetchPlaylists', fetchPlaylistsRouter);
+
+app.use('/api/fetchSong', fetchSongApi);
+app.use('/api/songsList', songsListApi);
+app.use('/api/fetchPlaylists', fetchPlaylistsApi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

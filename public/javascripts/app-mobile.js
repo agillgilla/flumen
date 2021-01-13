@@ -120,14 +120,22 @@ function nextSong(shuffleDiff) {
 
 $(document).ready(function() {
 	$( ".shuffle").click(function() {
-		shuffle = !shuffle;
-		updateShuffleColor();
+		if (!shuffle) {
+			shuffle = !shuffle;
+			replay = !replay;
+			updateShuffleColor();
+			updateReplayColor();
+		}
 		return false;
 	});
 
 	$( ".replay").click(function() {
-		replay = !replay;
-		updateReplayColor();
+		if (!replay) {
+			replay = !replay;
+			shuffle = !shuffle;
+			updateReplayColor();
+			updateShuffleColor();
+		}
 		return false;
 	});
 

@@ -1,0 +1,917 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"inline",
+				"inline-block\tdisplay"
+			],
+			[
+				"padd",
+				"padding-bottom\tproperty"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"marg",
+				"margin-right\tproperty"
+			],
+			[
+				"margin-",
+				"margin-left\tproperty"
+			],
+			[
+				"up",
+				"update_details_title"
+			],
+			[
+				"get",
+				"get_curr_category_titles"
+			],
+			[
+				"catego",
+				"category_titles"
+			],
+			[
+				"curr",
+				"curr_title"
+			],
+			[
+				"cate",
+				"category_titles"
+			],
+			[
+				"deta",
+				"details_pane_bg"
+			],
+			[
+				"new",
+				"new_selected_index"
+			],
+			[
+				"detail",
+				"details_pane_bg"
+			],
+			[
+				"load",
+				"load_categories"
+			],
+			[
+				"draw",
+				"draw_categories"
+			],
+			[
+				"selec",
+				"selecting_category"
+			],
+			[
+				"all",
+				"all_label_frame"
+			],
+			[
+				"high",
+				"highlight_thickness"
+			],
+			[
+				"fet",
+				"fetchSong"
+			],
+			[
+				"star",
+				"startDelay"
+			],
+			[
+				"hi",
+				"highlightColsToSwitch"
+			],
+			[
+				"highli",
+				"highlightColsBitmap"
+			],
+			[
+				"sec",
+				"secondColumnStartTicks"
+			],
+			[
+				"highg",
+				"highlightRowStr"
+			],
+			[
+				"num",
+				"numRows"
+			],
+			[
+				"Max",
+				"MaxColsSeparation"
+			],
+			[
+				"empt",
+				"emptyColsBitmap"
+			],
+			[
+				"Min",
+				"MinColsSeparation"
+			],
+			[
+				"numEm",
+				"numEmptyDoubleCols"
+			],
+			[
+				"int",
+				"int"
+			],
+			[
+				"numEmp",
+				"numEmptySingleCols"
+			],
+			[
+				"Float",
+				"float64"
+			],
+			[
+				"Tick",
+				"tickTime"
+			],
+			[
+				"rea",
+				"realCodeRows"
+			],
+			[
+				"fall",
+				"colFallingTime"
+			],
+			[
+				"col",
+				"colIndex"
+			],
+			[
+				"rpons",
+				"response_json"
+			],
+			[
+				"request",
+				"request_str"
+			],
+			[
+				"cooki",
+				"cookies_filename"
+			],
+			[
+				"episo",
+				"episodes_directory"
+			],
+			[
+				"timeba",
+				"timebase_ext"
+			],
+			[
+				"video",
+				"video_enhanced_filename"
+			],
+			[
+				"link",
+				"link_title_pair_split"
+			],
+			[
+				"mou",
+				"mousePosY"
+			],
+			[
+				"mouse",
+				"mousePosX"
+			],
+			[
+				"stes",
+				"stems_dir"
+			],
+			[
+				"donlo",
+				"download_link"
+			],
+			[
+				"fail_",
+				"fail_file"
+			],
+			[
+				"success",
+				"success_file"
+			],
+			[
+				"fail",
+				"fail_file"
+			],
+			[
+				"succe",
+				"success_filename"
+			],
+			[
+				"resul",
+				"result_song_words"
+			],
+			[
+				"actual",
+				"actual_song_words"
+			],
+			[
+				"result",
+				"result_song"
+			],
+			[
+				"res",
+				"result_song"
+			],
+			[
+				"actu",
+				"actual_song_words"
+			],
+			[
+				"nextSong",
+				"nextSongIndexToPlay"
+			],
+			[
+				"tableIndex",
+				"tableIndexVal"
+			],
+			[
+				"table",
+				"tableIndex"
+			],
+			[
+				"fetche",
+				"fetchedSongs"
+			],
+			[
+				"margin",
+				"margin-top\tproperty"
+			],
+			[
+				"inlin",
+				"inline-block\tdisplay"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/C/Users/Arjun/Desktop/fast-style-transfer-master/style.py",
+			"settings":
+			{
+				"buffer_size": 6161,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app.js",
+			"settings":
+			{
+				"buffer_size": 2144,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/listen.jade",
+			"settings":
+			{
+				"buffer_size": 2302,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/stylesheets/style.css",
+			"settings":
+			{
+				"buffer_size": 6186,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascripts/app.js",
+			"settings":
+			{
+				"buffer_size": 15156,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascripts/app-mobile.js",
+			"settings":
+			{
+				"buffer_size": 13855,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/listen-mobile.jade",
+			"settings":
+			{
+				"buffer_size": 2398,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/stylesheets/style-mobile.css",
+			"settings":
+			{
+				"buffer_size": 6767,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/xampp/htdocs/mobile/mobile-footer.php",
+		"/C/xampp/htdocs/mobile/mobile-navbar.php",
+		"/C/xampp/htdocs/mobile/hex.php",
+		"/C/lusio/lusio.py",
+		"/C/Users/Arjun/Desktop/Hex Website/index.html",
+		"/C/xampp/htdocs/index.php",
+		"/C/xampp/htdocs/hex.php",
+		"/C/xampp/htdocs/terms.php",
+		"/C/xampp/htdocs/mobile/index.php",
+		"/C/xampp/htdocs/mobile/stylesheet.css",
+		"/C/xampp/htdocs/mobile/desktop_redirect.php",
+		"/C/xampp/htdocs/mobile_redirect.php",
+		"/C/flumen/api/fetchPlaylists.js",
+		"/C/flumen/api/songsList.js",
+		"/C/flumen/api/fetchSong.js",
+		"/C/flumen/api/streamMusic.js",
+		"/C/lusio/poster_collector.py",
+		"/C/xampp/htdocs/hex-mobile.php",
+		"/C/Users/Arjun/Desktop/sort.py",
+		"/C/lusio/episode_renamer.py",
+		"/C/MOVIES/format_hevc.sh",
+		"/C/MOVIES/convert.sh",
+		"/C/Users/Arjun/Desktop/Jimmy Neutron UPSCALED/Jimmy Neutron Hulu/upscale.sh",
+		"/C/Users/Arjun/Desktop/course_captures/course_cap.sh",
+		"/C/thematrix/thematrix.go",
+		"/C/Users/Arjun/Desktop/sheets.py",
+		"/C/Users/Arjun/Desktop/The Matrix Bitmap Characters/characters.txt",
+		"/C/Users/Arjun/Desktop/course_cap.sh",
+		"/C/MOVIES/deep-convert-container.sh",
+		"/C/Users/Arjun/go/src/github.com/agillgilla/echoserver/echoserver.go",
+		"/C/deemix/deemixgui/deemix.bat",
+		"/C/vimeo-api-test/vimeo_api_test.py",
+		"/C/Users/Arjun/Videos/Desktop/Jimmy Neutron Screencap/jimmy.sh",
+		"/C/MOVIES/deep-convert.sh",
+		"/C/MOVIES/subtitles.sh",
+		"/C/Users/Arjun/Desktop/Jimmy Neutron UPSCALED/audio.sh",
+		"/C/Users/Arjun/Desktop/Jimmy Neutron UPSCALED/upscale.sh",
+		"/C/Users/Arjun/Desktop/jimmy.py",
+		"/C/lusio/scale",
+		"/C/MOVIES/mac_convert_h265.sh",
+		"/C/Users/Arjun/go/src/github.com/agillgilla/autoclicker/autoclick.go",
+		"/C/MOVIES/CURR DOWNLOAD/Friends.S06.1080p.NF.WEB-DL.DDP5.1.x264-PRAGMA/Friends.S06.1080p.NF.WEB-DL.DDP5.1.x264-PRAGMA.part01/Friends.S06.1080p.NF.WEB-DL.DDP5.1.x264-PRAGMA/deep-move.sh",
+		"/C/autoclicker/getpointer.go",
+		"/C/autoclicker/skv.go",
+		"/C/autoclicker/autoclick.go",
+		"/C/stem-fetcher/stem-fetcher.py",
+		"/C/flumen/public/javascripts/sorttable.js",
+		"/C/flumen/views/listen-mobile.jade",
+		"/C/flumen/routes/listen.js",
+		"/C/flumen/routes/index.js",
+		"/C/Users/Arjun/Desktop/fast-style-transfer-master/setup.sh",
+		"/C/Users/Arjun/Desktop/fast-style-transfer-master/evaluate.py",
+		"/C/Users/Arjun/Desktop/fast-style-transfer-master/src/optimize.py",
+		"/C/Users/Arjun/Desktop/twitter-phish/login.js",
+		"/C/Users/Arjun/Desktop/twitter-phish/login.css",
+		"/C/Users/Arjun/Desktop/twitter-phish/login.html",
+		"/C/Users/Arjun/Desktop/twitter-phish/send_email.py",
+		"/C/My Web Sites/twitter/index.html",
+		"/C/My Web Sites/twitter/mobile.twitter.com/login.html",
+		"/C/MOVIES/Drake and Josh GOOD/format.sh",
+		"/C/Users/Arjun/Desktop/sleep.bat",
+		"/C/cmder/bin/Readme.md"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"h1",
+			"set_inactive",
+			"details_title",
+			"panel(",
+			"draw_details_pane",
+			"details_pane.destroy",
+			"draw_details_pane",
+			"frame =",
+			" frame =",
+			"frame =",
+			"categories_manager",
+			"titles_grid =",
+			"panelgrid(",
+			"panelgrid()",
+			"jpg",
+			"mp4",
+			"titles_grid",
+			"panelgrid(",
+			"panel(",
+			"panel_images",
+			"mp4",
+			"borderwidth",
+			"delta",
+			"set_active",
+			"!",
+			"left",
+			"move_selection",
+			"left",
+			"frame",
+			"highlight",
+			"highglight",
+			"highlightthickness",
+			"show_padding",
+			"episodes",
+			" shows",
+			"in shows",
+			"shows.get",
+			"shows[",
+			"shows",
+			"mp4",
+			"episode",
+			"padding",
+			"details_pane",
+			"nextsong(",
+			"333",
+			"numhighlightcols",
+			"10",
+			"endingticks",
+			"[i]",
+			"columnends",
+			"columnlens",
+			"columnstartticks",
+			"fmt.println",
+			"fmt",
+			"startdelay",
+			"columnlens",
+			"coderows",
+			") ",
+			"starttimes",
+			"realCode",
+			"realcode",
+			"float32",
+			"time",
+			"details_pane",
+			"fullscreen",
+			"currsong",
+			"basename_no_ext",
+			"details_pane",
+			"panel_scale",
+			"panel_scaled_img",
+			"panel_img_width",
+			"panel_scale",
+			"panel_img_width",
+			"D:",
+			"1",
+			"d:",
+			"D:",
+			"fmt",
+			"result_title",
+			"movedown",
+			"e6e6e6",
+			"rowindex",
+			"moveUp",
+			".play",
+			"playsong",
+			"if (shuffle",
+			"tableIndexInt",
+			"parseint(tableindex)",
+			"int",
+			"height:",
+			"border",
+			"900",
+			"table-button",
+			"E6E6",
+			"songentry",
+			"addtoqueue",
+			"playsong(",
+			"playpause",
+			"onclick",
+			"data-index",
+			"darktable",
+			"songqueue",
+			"darktable",
+			"input",
+			"fader",
+			"inner",
+			"volume-slider",
+			"fader",
+			"volume",
+			"div.length",
+			"current-time",
+			"div.length",
+			"length",
+			"input",
+			"length",
+			"footer",
+			"length",
+			"footer",
+			"action",
+			"inline-block",
+			"input",
+			"length",
+			"currsong",
+			"playpause",
+			"color: #E6E6E6;",
+			"tbody",
+			"if (shuffle",
+			".previous\").click"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"[col]",
+			"tableIndex",
+			"tableIndexInt"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 7,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/Arjun/Desktop/fast-style-transfer-master/style.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6161,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3547,
+								3561
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 708.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2144,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "views/listen.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2302,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								522,
+								522
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/stylesheets/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6186,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3592,
+								3592
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/javascripts/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15156,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5096,
+								5096
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/javascripts/app-mobile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13855,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5711,
+								5711
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3500.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "views/listen-mobile.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2398,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								669,
+								669
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "public/stylesheets/style-mobile.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6767,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6462,
+								6462
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "flumen.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

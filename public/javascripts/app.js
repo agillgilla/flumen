@@ -125,8 +125,8 @@ $(document).ready(function() {
 			replay = !replay;
 			updateShuffleColor();
 			updateReplayColor();
-			return false;
 		}
+		return false;
 	});
 
 	$( ".replay").click(function() {
@@ -135,8 +135,8 @@ $(document).ready(function() {
 			shuffle = !shuffle;
 			updateReplayColor();
 			updateShuffleColor();
-			return false;
 		}
+		return false;
 	});
 
 	updateShuffleColor();

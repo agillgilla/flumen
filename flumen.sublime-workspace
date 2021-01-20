@@ -294,7 +294,7 @@
 			"file": "public/javascripts/app.js",
 			"settings":
 			{
-				"buffer_size": 15156,
+				"buffer_size": 15296,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -303,7 +303,7 @@
 			"file": "public/javascripts/app-mobile.js",
 			"settings":
 			{
-				"buffer_size": 13855,
+				"buffer_size": 13995,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -446,6 +446,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"shuffle =",
+			"shuffle",
 			"h1",
 			"set_inactive",
 			"details_title",
@@ -571,9 +573,7 @@
 			"currsong",
 			"playpause",
 			"color: #E6E6E6;",
-			"tbody",
-			"if (shuffle",
-			".previous\").click"
+			"tbody"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -594,7 +594,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -624,7 +624,7 @@
 						"translation.y": 708.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -652,7 +652,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -682,7 +682,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -710,7 +710,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -719,15 +719,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15156,
+						"buffer_size": 15296,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5096,
-								5096
+								2904,
+								2904
 							]
 						],
 						"settings":
@@ -736,10 +736,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1820.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -748,15 +748,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13855,
+						"buffer_size": 13995,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5711,
-								5711
+								2920,
+								2920
 							]
 						],
 						"settings":
@@ -765,10 +765,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3500.0,
+						"translation.y": 1800.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -798,7 +798,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -826,7 +826,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

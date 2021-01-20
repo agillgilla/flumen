@@ -2,7 +2,7 @@ doctype html
 html
   head
     title #{title}
-    link(rel='stylesheet', href='css/style-mobile.css')
+    link(rel='stylesheet', href='css/style.css')
     //link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     //link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css')
     link(rel='stylesheet', href='public/font-awesome-4.7.0/css/font-awesome.min.css')
@@ -15,21 +15,24 @@ html
     //crossorigin="anonymous")
     script(type='text/javascript', src='js/jquery-3.5.0.min.js')
 
-    script(type='text/javascript', src='js/app-mobile.js')
+
+    script(type='text/javascript', src='js/app.js')
     script(type='text/javascript', src='js/sorttable.js')
   body
-    h1 Flumen (Mobile)
+    h1 Flumen
     h2 Queue
     table#queueTable.darkTable
       thead
-          tr
-            th
-            th
-            th
-            th Song
-            th
-              span.fa.fa-clock-o
-        tbody
+        tr
+          th
+          th
+          th
+          th Title
+          th Artist
+          th Album
+          th
+            span.fa.fa-clock-o
+      tbody
     h2 Songs
     section.playlistSection
       table#playlistTable.darkTable.sortable
@@ -37,41 +40,39 @@ html
           tr
             th
             th
-            th Song
+            th.sortHeader Title
+            th Artist
+            th Album
             th
               span.fa.fa-clock-o
         tbody
     div#footer
-      .song-info-and-volume
-        .song-info
-          span#currSong
-          br
-          br
-          span#currArtist
-        .volume-slider
-          div#volume-div.volume-slider-inner
-            div.volume-symbol-left
-              i.fa.fa-volume-down.fa-2x
-            div.fader
-              input#fader(type='range', min='0', max='100', value='100', step='1', oninput='outputUpdate(value)')
-            div.volume-symbol-right
-              i.fa.fa-volume-up.fa-2x
+      .song-info
+        span#currSong
+        br
+        br
+        span#currArtist
       .action
         a.shuffle.active(href='#')
-          i.fa.fa-random.fa-3x
+          i.fa.fa-random
         a.previous.jcarousel-prev(href='#')
-          i.fa.fa-step-backward.fa-3x
+          i.fa.fa-step-backward
         a.play(href='#')
-          i.fa.fa-play.fa-fw.fa-2x
+          i.fa.fa-play.fa-fw
         a.next.jcarousel-next(href='#')
-          i.fa.fa-step-forward.fa-3x
+          i.fa.fa-step-forward
         a.replay(href='#')
-          i.fa.fa-refresh.fa-3x
-      .length
+          i.fa.fa-refresh
+        .length
           span#current-time --:--
           span#total-time --:--
           input#timeSlider(type='range', min='0', max='1000', value='0', step='.1')
           output.duration(for='timeSlider')
+      .volume-slider
+        div#volume-div.volume-slider-inner
+          i.fa.fa-volume-down
+          input#fader.volume-slider(type='range', min='0', max='100', value='100', step='1', oninput='outputUpdate(value)')
+          i.fa.fa-volume-up
           
 
 

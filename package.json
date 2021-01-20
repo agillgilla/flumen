@@ -14,10 +14,10 @@
     "get-mp3-duration": "^1.0.0",
     "hashmap": "^2.4.0",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "mp3-duration": "^1.1.0",
     "node-id3": "^0.1.16",
+    "pug": "^3.0.0",
     "speaker": "^0.5.1"
   }
 }

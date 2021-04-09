@@ -1,7 +1,3 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 a {
   color: #00B7FF;
 }
@@ -14,6 +10,10 @@ a {
   box-sizing: border-box;
 	padding: 0;
 	z-index: 2;
+}
+
+h2 {
+	font-family: 'proxima-nova', sans-serif;
 }
 
 body {
@@ -34,6 +34,10 @@ div.container {
   	position: relative;
   	background: #333;
 	box-shadow: 0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);	
+}
+
+img.flumen {
+	width: 10rem;
 }
 
 div.info {

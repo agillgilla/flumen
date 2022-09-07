@@ -122,7 +122,17 @@ router.get('/', function(req, res, next) {
       res.json(returnData);
   });
   */
-
+  try {
+    if (!fs.existsSync(filePath)) {
+      res.sendStatus(404);
+      return;
+    }
+  } catch(err) {
+    console.error(err);
+    res.sendStatus(404);
+    return;
+  }
+  
   var readStream = fs.createReadStream(filePath);
 
   if(/firefox/i.test(req.headers['user-agent'])) {

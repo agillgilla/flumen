@@ -41,7 +41,7 @@ function listPlaylists() {
 		listItem.addEventListener("click", (event) => {
 			var songIndex = event.target.closest("tr").getAttribute("data-index");
 
-			window.location.href = "/listen?playlist=" + fetchedPlaylists[songIndex].name;
+			window.location.href = "/listen?playlist=" + encodeURIComponent(fetchedPlaylists[songIndex].name);
 		});
 	}
 }

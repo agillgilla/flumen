@@ -6,16 +6,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var songsLoader = require('./songsLoader.js');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var listenRouter = require('./routes/listen');
 var streamMusicRouter = require('./routes/streamMusic');
 var songsListRouter = require('./routes/songsList');
-var fetchPlaylistsRouter = require('./routes/fetchPlaylists')
+var fetchPlaylistsRouter = require('./routes/fetchPlaylists');
 
 var fetchSongApi = require('./api/fetchSong');
 var songsListApi = require('./api/songsList');
-var fetchPlaylistsApi = require('./api/fetchPlaylists')
+var fetchPlaylistsApi = require('./api/fetchPlaylists');
+
+songsListRouter.setSongsList(songsLoader.getSongsList());
+songsListApi.setSongsList(songsLoader.getSongsList());
 
 var app = express();
 
@@ -27,11 +32,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-//app.use(express.static(path.join(__dirname, 'public')));
-app.use('/public',express.static(path.join(__dirname, 'public')));
-app.use('/img',express.static(path.join(__dirname, 'public/images')));
-app.use('/js',express.static(path.join(__dirname, 'public/javascripts')));
-app.use('/css',express.static(path.join(__dirname, 'public/stylesheets')));
+
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'public/images')));
+app.use('/js', express.static(path.join(__dirname, 'public/javascripts')));
+app.use('/css', express.static(path.join(__dirname, 'public/stylesheets')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -41,7 +46,7 @@ app.use('/songsList', songsListRouter);
 app.use('/fetchPlaylists', fetchPlaylistsRouter);
 
 app.use('/api/fetchSong', fetchSongApi);
-app.use('/api/songsList', songsListApi);
+app.use('/api/songsList', songsListApi.router);
 app.use('/api/fetchPlaylists', fetchPlaylistsApi);
 
 // catch 404 and forward to error handler
